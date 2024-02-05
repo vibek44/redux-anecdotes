@@ -16,14 +16,35 @@ const asObject = (anecdote) => {
     votes: 0
   }
 }
-
+//map method is used to create initial state passed to reducer from array of anecdotesAtStart
 const initialState = anecdotesAtStart.map(asObject)
 
-const reducer = (state = initialState, action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
+const rootReducer = (state = initialState, action) => {
+  switch(action.type){
+    case 'VOTE': {
+      const id =action.payload.id
+      //console.log(typeof id)
+      const anecdoteToVote=state.find(anecdote =>anecdote.id===id )
+      //console.log(typeof anecdoteToVote.id);
+      
+      const votedAnecdote = {
+        ...anecdoteToVote,
+        votes:anecdoteToVote.votes+1
+      }
+      return state.map(anecdote => anecdote.id !== id ? anecdote :votedAnecdote)
+    }
+    default:
+    return state
+  }
 
-  return state
+  
 }
 
-export default reducer
+export const handleVote = (id) => {
+  return {
+    type:'VOTE',
+    payload:{ id }
+  }
+}
+
+export default rootReducer
