@@ -21,23 +21,37 @@ const initialState = anecdotesAtStart.map(asObject)
 
 const rootReducer = (state = initialState, action) => {
   switch(action.type){
+    case 'NEW_ANECDOTE':
+      return state.concat(action.payload)
+
     case 'VOTE': {
       const id =action.payload.id
       //console.log(typeof id)
       const anecdoteToVote=state.find(anecdote =>anecdote.id===id )
-      //console.log(typeof anecdoteToVote.id);
-      
+      //console.log(typeof anecdoteToVote.id); 
       const votedAnecdote = {
         ...anecdoteToVote,
         votes:anecdoteToVote.votes+1
       }
       return state.map(anecdote => anecdote.id !== id ? anecdote :votedAnecdote)
     }
+    
     default:
     return state
   }
 
   
+}
+
+export const createAnecdote = (anecdote) => {
+  return {
+    type:'NEW_ANECDOTE',
+    payload: { 
+      content:anecdote,
+      id:getId(),
+      votes:0
+    }
+  }
 }
 
 export const handleVote = (id) => {
