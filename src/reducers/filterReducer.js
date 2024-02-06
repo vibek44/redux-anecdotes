@@ -1,5 +1,5 @@
 
-const filterReducer = (state=null, action) => {
+const filterReducer = (state='', action) => {
   switch(action.type){
     case 'SET_FILTER':
       return action.payload
@@ -8,7 +8,7 @@ const filterReducer = (state=null, action) => {
   }
 }
 
-//action creator
+//action creator for filterReducer
 export const setFilter=(filter)=>{
   return{
     type:'SET_FILTER',
