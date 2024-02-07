@@ -1,16 +1,9 @@
 import ReactDOM from 'react-dom/client'
-import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import App from './App'
-import anecdoteReducer from './reducers/anecdoteReducer'
-import filterReducer from './reducers/filterReducer'
+import { store } from './store'
 
 
-
-const store = configureStore({ reducer:{
-  anecdotes:anecdoteReducer,
-  textfilter:filterReducer
-} })
 console.log(store.getState());
 //const store = configureStore({reducer:anecdoteReducer})
 
