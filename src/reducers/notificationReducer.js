@@ -5,8 +5,7 @@ const notificationSlice = createSlice({
   initialState:'',
   reducers:{
     setNotification(state,action){
-      console.log(typeof action.payload.id);
-      
+      //console.log(typeof action.payload.id);
       if(action.payload.id===undefined && typeof action.payload!==Object)
       return state=`you added ' ${action.payload}' `
       if( typeof action.payload.id==='string')
