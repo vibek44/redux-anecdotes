@@ -8,10 +8,9 @@ const anecdoteSlice=createSlice({
   initialState:[],
   reducers:{
     //console.log(JSON.parse(JSON.stringify(state))) to print state in redux
-    voteAnecdotee(state,action){
+    voteAnecdote(state,action){
       const votedAnecdote=action.payload
       return state.map(anecdote => anecdote.id !== votedAnecdote.id ? anecdote :votedAnecdote)
-
     },
     appendAnecdote(state,action){
         state.push(action.payload)
@@ -21,7 +20,7 @@ const anecdoteSlice=createSlice({
     },
   }
 })
-export const { voteAnecdotee,appendAnecdote,setAnecdote}=anecdoteSlice.actions
+export const { voteAnecdote,appendAnecdote,setAnecdote}=anecdoteSlice.actions
 
 export const initializeAnecdote=() => {
   return async dispatch => {
@@ -45,10 +44,9 @@ export const addVote=(id)=>{
     await anecdoteService.update(changedAnecdote)
     //console.log(changedAnecdote);
     
-    dispatch(voteAnecdotee(changedAnecdote))
+    dispatch(voteAnecdote(changedAnecdote))
   }
 }
-
 
 export default anecdoteSlice.reducer
 
